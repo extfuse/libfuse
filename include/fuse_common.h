@@ -120,6 +120,7 @@ struct fuse_file_info {
 #define FUSE_CAP_ASYNC_DIO		(1 << 15)
 #define FUSE_CAP_WRITEBACK_CACHE	(1 << 16)
 #define FUSE_CAP_NO_OPEN_SUPPORT	(1 << 17)
+#define FUSE_CAP_EXTFUSE			(1 << 21)
 
 /**
  * Ioctl flags
@@ -199,10 +200,13 @@ struct fuse_conn_info {
 	 */
 	unsigned time_gran;
 
+	/* ExtFUSE prog */
+	unsigned extfuse_prog_fd;
+
 	/**
 	 * For future use.
 	 */
-	unsigned reserved[22];
+	unsigned reserved[21];
 };
 
 struct fuse_session;

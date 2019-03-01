@@ -1949,6 +1949,15 @@ static void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 	if (req->f->conn.proto_minor >= 18)
 		f->conn.capable |= FUSE_CAP_IOCTL_DIR;
 
+	if (arg->flags & FUSE_FS_EXTFUSE) {
+		if (f->debug)
+			fprintf(stderr, "Enabling FUSE_FS_EXTFUSE capability\n");
+		f->conn.capable |= FUSE_CAP_EXTFUSE;
+	} else {
+		if (f->debug)
+			fprintf(stderr, "FUSE_FS_EXTFUSE capability not present!\n");
+	}
+
 	if (f->atomic_o_trunc)
 		f->conn.want |= FUSE_CAP_ATOMIC_O_TRUNC;
 	if (f->op.getlk && f->op.setlk && !f->no_remote_posix_lock)
@@ -2024,6 +2033,13 @@ static void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 		outarg.flags |= FUSE_ASYNC_DIO;
 	if (f->conn.want & FUSE_CAP_WRITEBACK_CACHE)
 		outarg.flags |= FUSE_WRITEBACK_CACHE;
+	if (f->conn.want & FUSE_CAP_EXTFUSE) {
+		outarg.flags |= FUSE_FS_EXTFUSE;
+		outarg.extfuse_prog_fd = f->conn.extfuse_prog_fd;
+		if (f->debug)
+			fprintf(stderr, "   ExtFUSE prog fd: %d\n",
+				outarg.extfuse_prog_fd);
+	}
 	outarg.max_readahead = f->conn.max_readahead;
 	outarg.max_write = f->conn.max_write;
 	if (f->conn.proto_minor >= 13) {

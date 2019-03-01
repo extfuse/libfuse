@@ -250,6 +250,7 @@ struct fuse_file_lock {
 #define FUSE_ASYNC_DIO		(1 << 15)
 #define FUSE_WRITEBACK_CACHE	(1 << 16)
 #define FUSE_NO_OPEN_SUPPORT	(1 << 17)
+#define FUSE_FS_EXTFUSE		(1 << 21)
 
 /**
  * CUSE INIT request/reply flags
@@ -587,7 +588,8 @@ struct fuse_init_out {
 	uint16_t	congestion_threshold;
 	uint32_t	max_write;
 	uint32_t	time_gran;
-	uint32_t	unused[9];
+	uint32_t	extfuse_prog_fd;
+	uint32_t	unused[8];
 };
 
 #define CUSE_INIT_INFO_MAX 4096
