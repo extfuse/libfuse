@@ -102,6 +102,7 @@ struct fuse_file_info {
  * FUSE_CAP_ASYNC_DIO: asynchronous direct I/O submission
  * FUSE_CAP_WRITEBACK_CACHE: use writeback cache for buffered writes
  * FUSE_CAP_NO_OPEN_SUPPORT: support zero-message opens
+ * FUSE_CAP_EXTFUSE: support ExtFUSE bpf extensions
  */
 #define FUSE_CAP_ASYNC_READ		(1 << 0)
 #define FUSE_CAP_POSIX_LOCKS		(1 << 1)
@@ -120,7 +121,7 @@ struct fuse_file_info {
 #define FUSE_CAP_ASYNC_DIO		(1 << 15)
 #define FUSE_CAP_WRITEBACK_CACHE	(1 << 16)
 #define FUSE_CAP_NO_OPEN_SUPPORT	(1 << 17)
-#define FUSE_CAP_EXTFUSE			(1 << 21)
+#define FUSE_CAP_EXTFUSE			(1 << 26)
 
 /**
  * Ioctl flags

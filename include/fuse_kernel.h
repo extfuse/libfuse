@@ -231,6 +231,7 @@ struct fuse_file_lock {
  * FUSE_ASYNC_DIO: asynchronous direct I/O submission
  * FUSE_WRITEBACK_CACHE: use writeback cache for buffered writes
  * FUSE_NO_OPEN_SUPPORT: kernel supports zero-message opens
+ * FUSE_FS_EXTFUSE: enable ExtFUSE bpf extensions
  */
 #define FUSE_ASYNC_READ		(1 << 0)
 #define FUSE_POSIX_LOCKS	(1 << 1)
@@ -250,7 +251,7 @@ struct fuse_file_lock {
 #define FUSE_ASYNC_DIO		(1 << 15)
 #define FUSE_WRITEBACK_CACHE	(1 << 16)
 #define FUSE_NO_OPEN_SUPPORT	(1 << 17)
-#define FUSE_FS_EXTFUSE		(1 << 21)
+#define FUSE_FS_EXTFUSE		(1 << 26)
 
 /**
  * CUSE INIT request/reply flags
